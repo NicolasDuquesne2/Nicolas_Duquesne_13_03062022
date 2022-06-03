@@ -1,21 +1,30 @@
-import { useFetch } from "../../utils/Fetch"
+import { useDataProvider } from "../../utils/DataProvider"
+import { useEffect, useState } from "react"
+import axios from "axios"
 
 
 function Home () {
 
-    const user = useFetch('http://localhost:3001')
+    const http = 'http://localhost:3001/api/v1/user/login'
+    const data = {email: "steve@rogers.com", password: "password456"}
+    const config = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: "steve@rogers.com", password: "password456"}}
 
-    if (user.error) {
-        console.log('Data error loading')
 
-        if (!user.isLoading) {
-            console.log(user.data)
+
+    const response = useDataProvider({method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: "steve@rogers.com", password: "password456"}})
+
+    if (typeof(response) != "undefined") {
+
+        if (!response.error) {
+            return (
+                <p className="text">reponse 200</p>
+            )
+        } else {
+            return (
+                <p>Error</p>
+            )
         }
     }
-
-    return (
-        <p className="text">Page d'accueil</p>
-    )
 }
 
 export default Home
