@@ -1,4 +1,4 @@
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Header() {
     <nav className="main-nav">
@@ -12,7 +12,7 @@ function Header() {
         </a>
         <div>
             <a className="main-nav-item" href="./sign-in.html">
-                <i class="fa fa-user-circle"></i>
+                <FontAwesomeIcon icon="fa-user-circle" />
                 Sign In
             </a>
         </div>
