@@ -1,5 +1,7 @@
+import React from "react"
 import { useDataProvider } from "../../utils/DataProvider"
-import { connect } from 'react-redux'
+import Header from "../../Components/Header"
+//import { connect } from 'react-redux'
 //import { action } from 'module' pour mapDispatchToProps
 
 
@@ -12,7 +14,10 @@ function Home (props) {
 
         if (!response.error) {
             return (
-                <p className="text">reponse 200</p>
+                <React.Fragment>
+                    <Header />
+                    <p className="text">reponse 200</p>
+                </React.Fragment>
             )
         } else {
             return (
@@ -23,7 +28,7 @@ function Home (props) {
 }
 
 
-const mapStateToProps = (state) => {
+/**const mapStateToProps = (state) => {
     return {
         alpha: state.alpha
     }
@@ -33,8 +38,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setAlpha: () => dispatch()
     }
-}
+}*/
+
+//connect(mapStateToProps, mapDispatchToProps)(Home)
 
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home
