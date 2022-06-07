@@ -1,11 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../img/argentBankLogo.png'
 import './header.css'
+
+
+    
 
 function Header() {
     return (
         <nav className="main-nav">
-            <a class="main-nav-logo" href="./index.html">
+            <a className="main-nav-logo" href="./index.html">
                 <img
                     className="main-nav-logo-image"
                     src={logo}
@@ -15,7 +19,7 @@ function Header() {
             </a>
             <div>
                 <a className="main-nav-item" href="./sign-in.html">
-                    <FontAwesomeIcon icon="fa-solid fa-circle-user" />
+                    <FontAwesomeIcon icon= {faCircleUser} />
                     Sign In
                 </a>
             </div>
