@@ -8,7 +8,7 @@ import './signin.css'
 function SignIn() {
     return (
         <React.Fragment>
-            <Header />
+            <Header signOut={false}/>
             <main className="main bg-dark">
             <section className="sign-in-content">
                     <FontAwesomeIcon icon={faCircleUser} />

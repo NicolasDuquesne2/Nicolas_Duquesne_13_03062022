@@ -1,12 +1,23 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
+import { faCircleUser, faSignOut } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../img/argentBankLogo.png'
 import './header.css'
 
 
     
 
-function Header() {
+function Header(signOut) {
+
+    let signOutElement = ''
+
+    if (signOut.signOut) {
+        signOutElement = <a className="main-nav-item" href="/">
+                            <FontAwesomeIcon icon = {faSignOut} />
+                            Sign Out
+                         </a>
+    }
+
+
     return (
         <nav className="main-nav">
             <a className="main-nav-logo" href="/">
@@ -22,6 +33,7 @@ function Header() {
                     <FontAwesomeIcon icon= {faCircleUser} />
                     Sign In
                 </a>
+                {signOutElement}
             </div>
         </nav>
     )

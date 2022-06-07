@@ -14,7 +14,9 @@ function Home () {
     //const response = useDataProvider({method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: "steve@rogers.com", password: "password456"}})
     return (
         <React.Fragment>
-            <Header />
+            <Header 
+                signOut={false}
+            />
             <main>
                 <Hero component="Home"/>
                 <FeaturesWrapper />
