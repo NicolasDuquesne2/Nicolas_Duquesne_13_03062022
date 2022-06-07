@@ -3,6 +3,7 @@ import { useDataProvider } from "../../utils/DataProvider"
 import Header from "../../Components/Header"
 import Hero from "../../Components/Hero"
 import FeaturesWrapper from "../../Components/FeaturesWrapper"
+import Footer from "../../Components/Footer"
 //import { connect } from 'react-redux'
 //import { action } from 'module' pour mapDispatchToProps
 
@@ -18,6 +19,7 @@ function Home () {
                 <Hero component="Home"/>
                 <FeaturesWrapper />
             </main>
+            <Footer />
         </React.Fragment>
     )
 }
