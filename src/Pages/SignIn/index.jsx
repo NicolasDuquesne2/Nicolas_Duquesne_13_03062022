@@ -26,7 +26,7 @@ function SignIn() {
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        <a href="./user.html" className="sign-in-button">Sign In</a>
+                        <a href="/user/12" className="sign-in-button">Sign In</a>
                     </form>
                 </section>
             </main>
