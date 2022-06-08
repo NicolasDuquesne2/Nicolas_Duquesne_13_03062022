@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useRef } from "react"
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import Header from "../../Components/Header"
@@ -6,6 +7,15 @@ import Footer from "../../Components/Footer"
 import './signin.css'
 
 function SignIn() {
+
+    let navigate = useNavigate()
+    const signInButton = useRef(null)
+
+    function clickSignInButton(e) {
+        e.preventDefault()
+        navigate("/user/12")
+    }
+
     return (
         <React.Fragment>
             <Header signOut={false}/>
@@ -26,7 +36,7 @@ function SignIn() {
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        <a href="/user/12" className="sign-in-button">Sign In</a>
+                        <button class="sign-in-button" ref={signInButton} onClick={clickSignInButton}>Sign In</button>
                     </form>
                 </section>
             </main>
