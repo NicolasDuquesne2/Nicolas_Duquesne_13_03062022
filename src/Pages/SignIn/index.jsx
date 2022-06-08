@@ -14,7 +14,7 @@ function SignIn() {
                     <FontAwesomeIcon icon={faCircleUser} />
                     <h1>Sign In</h1>
                     <form>
-                    <div className="input-wrapper">
+                        <div className="input-wrapper">
                             <label htmlFor="username">Username</label>
                             <input type="text" id="username" />
                         </div>

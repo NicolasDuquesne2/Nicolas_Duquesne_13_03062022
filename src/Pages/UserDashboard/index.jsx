@@ -27,23 +27,27 @@ function UserDashboard() {
         }
     ]
 
-    const [editName, setEditName] = useState(true)
-    const visible = useRef(null)
+
+    const editForm = useRef(null)
+    const editButton = useRef(null)
+    const nameInput = useRef(null)
+    const fisrtNameInput = useRef(null)
 
     function clickEditName(e) {
-        switch (editName) {
-            case false:
-                setEditName(true)
-                visible.current.classList.add("unvisible")
-                visible.current.classList.remove("visible")
-                break
-            case true:
-                setEditName(false)
-                visible.current.classList.add("visible")
-                visible.current.classList.remove("unvisible")
-                break
-            default:
-        }
+        editForm.current.classList.add("visible")
+        editForm.current.classList.remove("unvisible")
+        editButton.current.classList.add("unvisible")
+        editButton.current.classList.remove("edit-button")
+    }
+
+    function clickEditCancel(e) {
+        e.preventDefault()
+        editForm.current.classList.add("unvisible")
+        editForm.current.classList.remove("visible")
+        editButton.current.classList.add("edit-button")
+        editButton.current.classList.remove("unvisible")
+        nameInput.current.value = ""
+        fisrtNameInput.current.value = ""
     }
 
     return (
@@ -51,9 +55,18 @@ function UserDashboard() {
             <Header signOut={true}/>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />Tony Jarvis!</h1>
-                    <button className="edit-button" onClick={clickEditName}>Edit Name</button>
-                    <p className='unvisible' ref={visible}>lol</p>
+                    <h1 className="header-title">Welcome back<br />Tony Jarvis!</h1>
+                    <button className="edit-button" onClick={clickEditName} ref={editButton}>Edit Name</button>
+                    <form className="unvisible edit-name" ref={editForm}>
+                        <div className="left-wrapper">
+                            <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput}/>
+                            <button className="name-button">Save</button>
+                        </div>
+                        <div className="right-wrapper">
+                            <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput}/>
+                            <button className="name-button" onClick={clickEditCancel}>Cancel</button>
+                        </div>
+                    </form>
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 {accounts.map((account, index) => (
