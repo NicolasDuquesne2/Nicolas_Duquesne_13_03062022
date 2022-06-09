@@ -6,6 +6,7 @@ import './main.css'
 import Home from './Pages/Home';
 import SignIn from './Pages/SignIn';
 import UserDashboard from './Pages/UserDashboard';
+import AccountDetail from './Pages/AccountDetails';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -16,6 +17,7 @@ root.render(
         <Route exact path="/" element={ <Home />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/user/:id" element={<UserDashboard />} />
+        <Route path="/user/:id/details" element={<AccountDetail />} />
       </Routes>
   </Router>
 );

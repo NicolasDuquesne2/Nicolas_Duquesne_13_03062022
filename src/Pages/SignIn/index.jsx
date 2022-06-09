@@ -36,7 +36,7 @@ function SignIn() {
                             <input type="checkbox" id="remember-me" />
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-                        <button class="sign-in-button" ref={signInButton} onClick={clickSignInButton}>Sign In</button>
+                        <button className="sign-in-button" ref={signInButton} onClick={clickSignInButton}>Sign In</button>
                     </form>
                 </section>
             </main>

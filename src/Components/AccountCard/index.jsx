@@ -1,7 +1,17 @@
+import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './account.css'
 
 function AccountCard(account) {
     const config = account.account
+    const transactButton = useRef(null)
+    let navigate = useNavigate()
+
+    
+    function clickTransactionButton(e) {
+        e.preventDefault()
+        navigate('/user/12/details')
+    }
 
     return (
         <section className="account">
@@ -11,7 +21,7 @@ function AccountCard(account) {
             <p className="account-amount-description">{config.description}</p>
             </div>
             <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button className="transaction-button" ref={transactButton} onClick={clickTransactionButton}>View transactions</button>
             </div>
         </section>
     )
