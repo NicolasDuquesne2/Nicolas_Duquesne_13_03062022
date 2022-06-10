@@ -39,4 +39,8 @@ min-height: 100vh;
     position: absolute !important;
     width: 1px !important;
     white-space: nowrap !important; /* 3 */
-  }
+}
+
+.unvisible {
+    display: none !important;
+}

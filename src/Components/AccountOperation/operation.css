@@ -1,0 +1,46 @@
+
+.operation-wrapper {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    color: black;
+    background: white;
+}
+
+.overview-wrapper {
+    display: flex;
+}
+
+.overview-wrapper :nth-child(2) {
+    text-align: center;
+    width: 10%;
+}
+
+.overview-wrapper :nth-child(3), .overview-wrapper :nth-child(4) {
+    text-align: center;
+    width: 38%;
+}
+
+.overview-wrapper :nth-child(5) {
+    text-align: center;
+    width: 10%;
+}
+
+
+.button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4%;
+}
+
+.dropButton {
+    border-style: none;
+    padding: 0;
+    background: none;
+    cursor:pointer;
+}
+
+.infos-frame {
+    display: flex;
+}
+
