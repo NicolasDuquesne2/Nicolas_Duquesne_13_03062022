@@ -17,7 +17,16 @@ function AccountDetail() {
         {
             date: "june 20th, 2020",
             description: "Golden Sun Bakery",
-            amount: "$5.00",
+            amount: "$10.00",
+            balance: "$2082.79",
+            type: "Electronique",
+            category: "Food"
+        },
+
+        {
+            date: "june 20th, 2020",
+            description: "Golden Sun Bakery",
+            amount: "$7.00",
             balance: "$2082.79",
             type: "Electronique",
             category: "Food"
@@ -35,16 +44,7 @@ function AccountDetail() {
         {
             date: "june 20th, 2020",
             description: "Golden Sun Bakery",
-            amount: "$5.00",
-            balance: "$2082.79",
-            type: "Electronique",
-            category: "Food"
-        },
-
-        {
-            date: "june 20th, 2020",
-            description: "Golden Sun Bakery",
-            amount: "$5.00",
+            amount: "$4.00",
             balance: "$2082.79",
             type: "Electronique",
             category: "Food"

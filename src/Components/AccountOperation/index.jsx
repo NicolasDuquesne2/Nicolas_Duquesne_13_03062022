@@ -28,12 +28,12 @@ function AccountOperation(operation) {
 
     function clickCategoryButton(e) {
         e.preventDefault()
-        alert("cat button")
+        alert(data.amount)
     }
 
     function clickNotesButton(e) {
         e.preventDefault()
-        alert("notes button")
+        alert(data.amount)
     }
 
     return (
