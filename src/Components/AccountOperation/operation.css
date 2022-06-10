@@ -33,7 +33,7 @@
     width: 4%;
 }
 
-.dropButton {
+.no-style-button {
     border-style: none;
     padding: 0;
     background: none;
@@ -42,5 +42,15 @@
 
 .infos-frame {
     display: flex;
+}
+
+.change-wrapper {
+    display: flex;
+}
+
+.button-wrapper-tiny {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
 }
 

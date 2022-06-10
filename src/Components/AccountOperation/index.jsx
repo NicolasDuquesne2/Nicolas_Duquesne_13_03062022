@@ -1,16 +1,17 @@
 import { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faPen } from '@fortawesome/free-solid-svg-icons'
 import './operation.css'
 
 function AccountOperation(operation) {
 
     const data = operation.operation
     const dropButton = useRef(null)
+    const categoryButton = useRef(null)
+    const notesButton = useRef(null)
     const infos = useRef(null)
    
     const [chevronDown, setChevronDown] = useState(true)
-
 
     function clickDropButton() {
         if (infos.current.classList.contains("infos-frame")) {
@@ -25,11 +26,21 @@ function AccountOperation(operation) {
     }
 
 
+    function clickCategoryButton(e) {
+        e.preventDefault()
+        alert("cat button")
+    }
+
+    function clickNotesButton(e) {
+        e.preventDefault()
+        alert("notes button")
+    }
+
     return (
         <div className='operation-wrapper'>
             <div className='overview-wrapper'>
                 <div className='button-wrapper'>
-                    <button className='dropButton' ref={dropButton} onClick={clickDropButton}><FontAwesomeIcon icon={chevronDown? faChevronDown : faChevronUp}/></button>
+                    <button className='no-style-button' ref={dropButton} onClick={clickDropButton}><FontAwesomeIcon icon={chevronDown? faChevronDown : faChevronUp}/></button>
                 </div>
                 <p>{data.date}</p>
                 <p>{data.description}</p>
@@ -40,8 +51,18 @@ function AccountOperation(operation) {
                 <div className='button-wrapper'></div>
                 <div className='infos-wrapper'>
                     <p>Transaction type: {data.type}</p>
-                    <p>Category: {data.category}</p>
-                    <p>Notes: </p>
+                    <div className='change-wrapper'>
+                        <p>Category: {data.category}</p>
+                        <div className='button-wrapper-tiny'>
+                            <button className='no-style-button' ref={categoryButton} onClick={clickCategoryButton}><FontAwesomeIcon icon={faPen}/></button>
+                        </div>
+                    </div>
+                    <div className="change-wrapper">
+                        <p>Notes: </p>
+                        <div className='button-wrapper-tiny'>
+                            <button className='no-style-button' ref={notesButton} onClick={clickNotesButton}><FontAwesomeIcon icon={faPen}/></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
