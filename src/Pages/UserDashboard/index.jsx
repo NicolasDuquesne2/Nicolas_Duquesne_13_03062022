@@ -52,7 +52,7 @@ function UserDashboard() {
 
     return (
         <React.Fragment>
-            <Header signOut={true}/>
+            <Header signOut={true} userId={id}/>
             <main className="main bg-dark">
                 <div className="header">
                     <h1 className="header-title">Welcome back<br />Tony Jarvis!</h1>
