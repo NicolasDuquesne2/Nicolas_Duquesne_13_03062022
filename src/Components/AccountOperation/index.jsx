@@ -1,27 +1,27 @@
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
+import { connect } from 'react-redux/es/exports'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp, faPen } from '@fortawesome/free-solid-svg-icons'
+import { changeChevron } from '../../Redux/Chevron/actionChevron'
 import './operation.css'
 
-function AccountOperation(operation) {
+function AccountOperation(props) {
 
-    const data = operation.operation
+    const data = props.operation
     const dropButton = useRef(null)
     const categoryButton = useRef(null)
     const notesButton = useRef(null)
     const infos = useRef(null)
-   
-    const [chevronDown, setChevronDown] = useState(true)
 
     function clickDropButton() {
         if (infos.current.classList.contains("infos-frame")) {
             infos.current.classList.add("unvisible")
             infos.current.classList.remove("infos-frame")
-            setChevronDown(true)
+            props.changeChevron()
         } else if (infos.current.classList.contains("unvisible")){
             infos.current.classList.add("infos-frame")
             infos.current.classList.remove("unvisible")
-            setChevronDown(false)
+            props.changeChevron()
         }
     }
 
@@ -40,7 +40,7 @@ function AccountOperation(operation) {
         <div className='operation-wrapper'>
             <div className='overview-wrapper'>
                 <div className='button-wrapper'>
-                    <button className='no-style-button' ref={dropButton} onClick={clickDropButton}><FontAwesomeIcon icon={chevronDown? faChevronDown : faChevronUp}/></button>
+                    <button className='no-style-button' ref={dropButton} onClick={clickDropButton}><FontAwesomeIcon icon={props.chevronUp? faChevronUp: faChevronDown}/></button>
                 </div>
                 <p>{data.date}</p>
                 <p>{data.description}</p>
@@ -69,4 +69,17 @@ function AccountOperation(operation) {
     )
 }
 
-export default AccountOperation
+const mapStateToProps = state => {
+    return {
+        chevronUp: state.chevron.chevronUp
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        changeChevron: () => dispatch(changeChevron())
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AccountOperation)
