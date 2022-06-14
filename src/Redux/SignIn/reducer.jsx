@@ -7,7 +7,7 @@ const initialStateID = {
 }
 
 const postIdReducer = (state= initialStateID, action) => {
-    switch(action) {
+    switch(action.type) {
         case POST_ID:
             return {
                 ...state,
@@ -27,7 +27,8 @@ const postIdReducer = (state= initialStateID, action) => {
                 data: [],
                 error: action.payload
             }
-        default: return state
+        default:
+            return state
     }
 }
 
