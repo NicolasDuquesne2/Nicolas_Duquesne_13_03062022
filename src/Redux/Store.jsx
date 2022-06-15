@@ -1,5 +1,5 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-import postIdReducer from './SignIn/reducer'
+import postIdReducer from './Api/reducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
