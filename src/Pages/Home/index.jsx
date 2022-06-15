@@ -1,5 +1,4 @@
 import React from "react"
-import { useDataProvider } from "../../utils/DataProvider"
 import Header from "../../Components/Header"
 import Hero from "../../Components/Hero"
 import FeaturesWrapper from "../../Components/FeaturesWrapper"
