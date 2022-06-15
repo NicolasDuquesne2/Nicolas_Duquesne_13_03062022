@@ -60,7 +60,7 @@ function UserDashboard() {
                     <form className="unvisible edit-name" ref={editForm}>
                         <div className="left-wrapper">
                             <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput}/>
-                            <button className="name-button">Save</button>
+                            <input type="submit" className="name-button" value="Save"/>
                         </div>
                         <div className="right-wrapper">
                             <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput}/>
