@@ -2,7 +2,7 @@ import {POST_ID, POST_ID_SUCCES, POST_ID_FAIL } from './type'
 
 const initialStateID = {
     isLoading: false,
-    data: [],
+    data: null,
     error: ''
 }
 

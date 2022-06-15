@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { useRef, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { connect } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
@@ -11,35 +11,32 @@ import './signin.css'
 
 function SignIn({apiRes, apiCall}) {
 
-    const { register, handleSubmit, formState: {errors} } = useForm()
+    const { register, handleSubmit, setError ,formState: {errors} } = useForm()
     let navigate = useNavigate()
     let userNameError = ''
     let userPWError = ''
+    let formError = true
 
-    const onSubmit = data => console.log(data)
+    const onSubmit = ({username, password}) => {
+        const dataParams = {email: username, password: password}
+        apiCall(dataParams)
+    }
 
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
     errors.password? userPWError = <p className="error-message">{errors.password.message}</p> : userPWError = ''
 
-
-    function clickSignInButton(e) {
-        e.preventDefault()
-
-        apiCall({email: "steve@rogers.com", password: "password456"})
-
+    useEffect(() => {
         if (apiRes.isLoading) {
             console.log('loading')
         }else if (apiRes.error) {
             return (
                 console.log(apiRes.error)
             )
-        } else if (!apiRes.isLoading) {
-            return (
-                console.log(apiRes)
-            )
+        } else if (!apiRes.isLoading && apiRes.data != null) {
+            console.log(apiRes)
+            navigate("/user/12")   
         }
-        //navigate("/user/12")
-    }
+    }, [apiRes])
 
 
     return (
