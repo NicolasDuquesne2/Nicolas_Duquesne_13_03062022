@@ -18,7 +18,7 @@ function Error({type}) {
     }
 
     return (
-        <main className="main bg-dark">
+        <main className="main bg-dark flex">
             <section className="error-content">
                 <h1>Error {type} :</h1>
                 <br />

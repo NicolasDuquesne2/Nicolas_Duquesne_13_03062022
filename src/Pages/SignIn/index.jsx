@@ -21,7 +21,7 @@ function SignIn({apiRes, apiCall}) {
     const onSubmit = ({username, password, rememberMe}) => {
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
         setRememberMe(rememberMe)
-        //apiCall(dataParams)
+        apiCall(dataParams)
     }
 
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
@@ -38,7 +38,8 @@ function SignIn({apiRes, apiCall}) {
             console.log(apiRes)
             if (rememberMe) {
                 console.log('remember me')
-            }   
+            }
+            navigate("/user/12")
         }
 
         if (rememberMe) {

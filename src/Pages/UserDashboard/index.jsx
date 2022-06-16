@@ -91,7 +91,7 @@ function UserDashboard(props) {
     }, [apiResProf])
 
 
-    if (!apiResProf.isLoading && apiResProf.data === null) {
+    if (!apiResLog.isLoading && apiResLog.data === null) {
         return (
             <React.Fragment>
                 <Header signOut={false} />
