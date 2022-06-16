@@ -6,7 +6,7 @@ const initialStateID = {
     error: ''
 }
 
-const postIdReducer = (state= initialStateID, action) => {
+const profileReducer = (state= initialStateID, action) => {
     switch(action.type) {
         case POST_ID:
             return {
@@ -32,4 +32,4 @@ const postIdReducer = (state= initialStateID, action) => {
     }
 }
 
-export default postIdReducer
+export default profileReducer

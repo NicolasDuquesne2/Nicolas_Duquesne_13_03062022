@@ -28,7 +28,7 @@ export const apiCall = (data) => {
 
         dispatch(postId())
 
-        axios({method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: data})
+        axios(data)
         .then(res => {
             dispatch(postIdSuccess(res))
         })

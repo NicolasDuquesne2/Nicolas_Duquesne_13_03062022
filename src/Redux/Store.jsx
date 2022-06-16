@@ -1,9 +1,11 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-import postIdReducer from './Api/reducer'
+import logInReducer from './Login/logInReducer'
+import profileReducer from './Login/profileReducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
-    postIdReducer
+    logInReducer,
+    profileReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

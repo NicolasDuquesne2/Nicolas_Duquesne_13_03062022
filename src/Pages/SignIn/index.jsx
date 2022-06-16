@@ -4,7 +4,7 @@ import { connect } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import { apiCall } from '../../Redux/Api/action'
+import { apiCall } from '../../Redux/Login/action'
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import './signin.css'
@@ -18,7 +18,7 @@ function SignIn({apiRes, apiCall}) {
     let formError = true
 
     const onSubmit = ({username, password}) => {
-        const dataParams = {email: username, password: password}
+        const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
         apiCall(dataParams)
     }
 
@@ -72,7 +72,7 @@ function SignIn({apiRes, apiCall}) {
 
 const mapStateToProps = state => {
     return {
-        apiRes: state.postIdReducer
+        apiRes: state.logInReducer
     }
 }
 
