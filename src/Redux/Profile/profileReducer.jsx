@@ -1,4 +1,4 @@
-import {POST_ID, POST_ID_SUCCES, POST_ID_FAIL } from './type'
+import {PUT_PROFILE, PUT_PROFILE_SUCCES, PUT_PROFILE_FAIL } from './type'
 
 const initialStateID = {
     isLoading: false,
@@ -8,19 +8,19 @@ const initialStateID = {
 
 const profileReducer = (state= initialStateID, action) => {
     switch(action.type) {
-        case POST_ID:
+        case PUT_PROFILE:
             return {
                 ...state,
                 isLoading: true
             }
-        case POST_ID_SUCCES:
+        case PUT_PROFILE_SUCCES:
             return {
                 ...state,
                 isLoading: false,
                 data: action.payload,
                 error: ''
             }
-        case POST_ID_FAIL:
+        case PUT_PROFILE_FAIL:
             return {
                 ...state,
                 isLoading: false,
