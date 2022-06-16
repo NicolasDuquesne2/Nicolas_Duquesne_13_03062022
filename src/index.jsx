@@ -8,6 +8,7 @@ import Home from './Pages/Home';
 import SignIn from './Pages/SignIn';
 import UserDashboard from './Pages/UserDashboard';
 import AccountDetail from './Pages/AccountDetails';
+import ErrorPage from './Pages/Error';
 
 const root = createRoot(document.getElementById('root'));
 
@@ -20,6 +21,7 @@ root.render(
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/user/:id" element={<UserDashboard />} />
           <Route path="/user/:id/details" element={<AccountDetail />} />
+          <Route path="*" element ={<ErrorPage type="404"/>} />
         </Routes>
       </Provider>
   </Router>
