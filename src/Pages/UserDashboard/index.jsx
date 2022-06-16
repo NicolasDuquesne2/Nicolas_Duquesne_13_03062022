@@ -73,8 +73,9 @@ function UserDashboard(props) {
         apiCall(dataParams)
     }
 
-    errors.username? firstNameErrhtml = <p className="error-message">{errors.firstName.message}</p>: firstNameErrhtml = ''
-    errors.password? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
+
+    errors.firstName? firstNameErrhtml = <p className="error-message">{errors.firstName.message}</p>: firstNameErrhtml = ''
+    errors.lastName? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
 
     useEffect(() => {
         if (apiResProf.isLoading) {
@@ -100,13 +101,13 @@ function UserDashboard(props) {
                     <form className="visible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>
                         <div className="left-wrapper">
                             <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput} {...register("firstName", {required: "Please, enter a valid first name"})}/>
-                            <input type="submit" className="name-button" value="Save"/>
                             {firstNameErrhtml}
+                            <input type="submit" className="name-button" value="Save"/>
                         </div>
                         <div className="right-wrapper">
                             <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput} {...register("lastName", {required: "Please, enter a valid name"})}/>
-                            <button className="name-button" onClick={clickEditCancel}>Cancel</button>
                             {nameErrhtml}
+                            <button className="name-button" onClick={clickEditCancel}>Cancel</button>
                         </div>
                     </form>
                 </div>
