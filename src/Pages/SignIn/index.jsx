@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { connect } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
@@ -16,10 +16,12 @@ function SignIn({apiRes, apiCall}) {
     let userNameError = ''
     let userPWError = ''
     let formError = true
+    const [rememberMe, setRememberMe] = useState(false)
 
-    const onSubmit = ({username, password}) => {
+    const onSubmit = ({username, password, rememberMe}) => {
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
-        apiCall(dataParams)
+        setRememberMe(rememberMe)
+        //apiCall(dataParams)
     }
 
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
@@ -34,7 +36,13 @@ function SignIn({apiRes, apiCall}) {
             )
         } else if (!apiRes.isLoading && apiRes.data != null) {
             console.log(apiRes)
-            navigate("/user/12")   
+            if (rememberMe) {
+                console.log('remember me')
+            }   
+        }
+
+        if (rememberMe) {
+            navigate("/user/12")
         }
     }, [apiRes])
 
@@ -58,7 +66,7 @@ function SignIn({apiRes, apiCall}) {
                         {userPWError}
                     </div>
                     <div className="input-remember">
-                        <input type="checkbox" id="remember-me" {...register("remember-me")}/>
+                        <input type="checkbox" id="remember-me" {...register("rememberMe")}/>
                         <label htmlFor="remember-me">Remember me</label>
                     </div>
                     <input type="submit" className="sign-in-button" value="Sign in"/>

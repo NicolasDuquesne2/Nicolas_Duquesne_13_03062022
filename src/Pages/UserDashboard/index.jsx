@@ -84,7 +84,7 @@ function UserDashboard(props) {
             return (
                 console.log(apiResProf.error)
             )
-        } else if (!apiResProf.isLoading) {
+        } else if (!apiResProf.isLoading && apiResProf.data != null) {
             console.log(apiResProf)  
         }
     }, [apiResProf])
