@@ -1,6 +1,6 @@
 import './error.css'
 
-function Error(type) {
+function Error({type}) {
 
     let errorText = ""
 

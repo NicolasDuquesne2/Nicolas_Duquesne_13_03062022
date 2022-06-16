@@ -4,6 +4,7 @@ import { connect } from "react-redux/es/exports"
 import { useForm } from "react-hook-form"
 import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
+import Error from '../../Components/Error'
 import AccountCard from '../../Components/AccountCard'
 import { apiCall } from '../../Redux/Profile/action'
 import './dashboard.css'
@@ -90,6 +91,15 @@ function UserDashboard(props) {
     }, [apiResProf])
 
 
+    if (!apiResProf.isLoading && apiResProf.data === null) {
+        return (
+            <React.Fragment>
+                <Header signOut={false} />
+                <Error type="401" />
+                <Footer />
+            </React.Fragment>
+        )
+    }
 
     return (
         <React.Fragment>
