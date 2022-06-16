@@ -11,6 +11,9 @@ function Error(type) {
         case "401":
             errorText = "Restricted area. Connect to your account, please"
             break
+        case "500":
+            errorText = "The server has failed. Try later"
+            break
         default:
     }
 
