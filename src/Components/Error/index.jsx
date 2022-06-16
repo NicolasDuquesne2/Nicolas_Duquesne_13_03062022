@@ -20,7 +20,9 @@ function Error({type}) {
     return (
         <main className="main bg-dark">
             <section className="error-content">
-                <h1>Error {type} : {errorText}</h1>
+                <h1>Error {type} :</h1>
+                <br />
+                <h1>{errorText}</h1>
             </section>
         </main>
     )
