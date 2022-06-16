@@ -33,7 +33,7 @@ export const apiCall = (data) => {
             dispatch(postIdSuccess(res))
         })
         .catch(err => {
-            dispatch(postIdFail(err.message))
+            dispatch(postIdFail(err.response.status))
         })
     }
 }

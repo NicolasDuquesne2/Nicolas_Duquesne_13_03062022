@@ -7,6 +7,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { apiCall } from '../../Redux/Login/action'
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
+import useErrorsMessages from "../../Hooks/ErrorsMessages"
 import './signin.css'
 
 function SignIn({apiRes, apiCall}) {
@@ -15,7 +16,8 @@ function SignIn({apiRes, apiCall}) {
     let navigate = useNavigate()
     let userNameError = ''
     let userPWError = ''
-    let formError = true
+    const formErrorMessage = useErrorsMessages(apiRes.error)
+    let formErrorMessagehtml = ""
     const [rememberMe, setRememberMe] = useState(false)
 
     const onSubmit = ({username, password, rememberMe}) => {
@@ -28,7 +30,7 @@ function SignIn({apiRes, apiCall}) {
     errors.password? userPWError = <p className="error-message">{errors.password.message}</p> : userPWError = ''
 
     if (apiRes.error) {
-        console.log(apiRes.error)
+        formErrorMessagehtml = <p className="error-message-form">{formErrorMessage}</p>
     } else if (!apiRes.isLoading && apiRes.data != null) {
         console.log(apiRes)
         if (rememberMe) {
@@ -45,6 +47,7 @@ function SignIn({apiRes, apiCall}) {
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faCircleUser} />
                 <h1 className="signIn-title">Sign In</h1>
+                {formErrorMessagehtml}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
