@@ -5,10 +5,14 @@ import { useForm } from "react-hook-form"
 import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
 import AccountCard from '../../Components/AccountCard'
-import { apiCall } from '../../Redux/Login/action'
+import { apiCall } from '../../Redux/Profile/action'
 import './dashboard.css'
 
-function UserDashboard({apiRes, apiCall}) {
+function UserDashboard(props) {
+
+    const apiResLog = props.apiResLog
+    const apiResProf = props.apiResProf
+    const apiCall = props.apiCall
 
     const { id } = useParams()
 
@@ -37,7 +41,7 @@ function UserDashboard({apiRes, apiCall}) {
     const nameInput = useRef(null)
     const fisrtNameInput = useRef(null)
     let nameErrhtml = ""
-    let firstnameErrhtml = ""
+    let firstNameErrhtml = ""
 
     function clickEditName(e) {
         editForm.current.classList.add("visible")
@@ -62,27 +66,27 @@ function UserDashboard({apiRes, apiCall}) {
         url: 'http://localhost:3001/api/v1/user/profile', 
         data: {firstName, lastName}, 
         headers: {
-            Authorization: `Bearer ${apiRes.data}`
+            Authorization: `Bearer ${apiResLog.data}`
         }}
 
         console.log(dataParams)
-       //apiCall(dataParams)
+        apiCall(dataParams)
     }
 
-    errors.username? firstnameErrhtml = <p className="error-message">{errors.firstname.message}</p>: firstnameErrhtml = ''
-    errors.password? nameErrhtml = <p className="error-message">{errors.name.message}</p> : nameErrhtml = ''
+    errors.username? firstNameErrhtml = <p className="error-message">{errors.firstName.message}</p>: firstNameErrhtml = ''
+    errors.password? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
 
     useEffect(() => {
-        if (apiRes.isLoading) {
+        if (apiResProf.isLoading) {
             console.log('loading')
-        }else if (apiRes.error) {
+        }else if (apiResProf.error) {
             return (
-                console.log(apiRes.error)
+                console.log(apiResProf.error)
             )
-        } else if (!apiRes.isLoading) {
-            console.log(apiRes)  
+        } else if (!apiResProf.isLoading) {
+            console.log(apiResProf)  
         }
-    }, [apiRes])
+    }, [apiResProf])
 
 
 
@@ -95,12 +99,12 @@ function UserDashboard({apiRes, apiCall}) {
                     <button className="edit-button" onClick={clickEditName} ref={editButton}>Edit Name</button>
                     <form className="visible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>
                         <div className="left-wrapper">
-                            <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput} {...register("firstname", {required: "Please, enter a valid first name"})}/>
+                            <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput} {...register("firstName", {required: "Please, enter a valid first name"})}/>
                             <input type="submit" className="name-button" value="Save"/>
-                            {firstnameErrhtml}
+                            {firstNameErrhtml}
                         </div>
                         <div className="right-wrapper">
-                            <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput} {...register("name", {required: "Please, enter a valid name"})}/>
+                            <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput} {...register("lastName", {required: "Please, enter a valid name"})}/>
                             <button className="name-button" onClick={clickEditCancel}>Cancel</button>
                             {nameErrhtml}
                         </div>
@@ -122,7 +126,8 @@ function UserDashboard({apiRes, apiCall}) {
 
 const mapStateToProps = state => {
     return {
-        apiRes: state.logInReducer
+        apiResLog: state.logInReducer,
+        apiResProf: state.profileReducer
     }
 }
 

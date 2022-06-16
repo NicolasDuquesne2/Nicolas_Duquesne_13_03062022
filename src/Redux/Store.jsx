@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
 import logInReducer from './Login/logInReducer'
-import profileReducer from './Login/profileReducer'
+import profileReducer from './Profile/profileReducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
