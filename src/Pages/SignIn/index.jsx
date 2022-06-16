@@ -27,25 +27,15 @@ function SignIn({apiRes, apiCall}) {
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
     errors.password? userPWError = <p className="error-message">{errors.password.message}</p> : userPWError = ''
 
-    useEffect(() => {
-        if (apiRes.isLoading) {
-            console.log('loading')
-        }else if (apiRes.error) {
-            return (
-                console.log(apiRes.error)
-            )
-        } else if (!apiRes.isLoading && apiRes.data != null) {
-            console.log(apiRes)
-            if (rememberMe) {
-                console.log('remember me')
-            }
-            navigate("/user/12")
-        }
-
+    if (apiRes.error) {
+        console.log(apiRes.error)
+    } else if (!apiRes.isLoading && apiRes.data != null) {
+        console.log(apiRes)
         if (rememberMe) {
-            navigate("/user/12")
+            console.log('remember me')
         }
-    }, [apiRes])
+        navigate("/user/12")
+    }
 
 
     return (
@@ -54,7 +44,7 @@ function SignIn({apiRes, apiCall}) {
             <main className="main bg-dark">
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faCircleUser} />
-                <h1>Sign In</h1>
+                <h1 className="signIn-title">Sign In</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
                         <label htmlFor="username">Username</label>
