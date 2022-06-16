@@ -44,3 +44,10 @@ min-height: 100vh;
 .unvisible {
     display: none !important;
 }
+
+.error-message-form {
+    background: rgb(212, 81, 81);
+    padding: 10px;
+    font-weight: 600;
+    text-align: center;
+} 

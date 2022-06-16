@@ -17,7 +17,7 @@ function SignIn({apiRes, apiCall}) {
     let userNameError = ''
     let userPWError = ''
     const formErrorMessage = useErrorsMessages(apiRes.error)
-    let formErrorMessagehtml = ""
+    const [formErrorMessagehtml, setFormErrorMessagehtml] = useState(null)
     const [rememberMe, setRememberMe] = useState(false)
 
     const onSubmit = ({username, password, rememberMe}) => {
@@ -29,15 +29,19 @@ function SignIn({apiRes, apiCall}) {
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
     errors.password? userPWError = <p className="error-message">{errors.password.message}</p> : userPWError = ''
 
-    if (apiRes.error) {
-        formErrorMessagehtml = <p className="error-message-form">{formErrorMessage}</p>
-    } else if (!apiRes.isLoading && apiRes.data != null) {
-        console.log(apiRes)
-        if (rememberMe) {
-            console.log('remember me')
+
+
+    useEffect(() => {
+        if (apiRes.error) {
+            setFormErrorMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
+        } else if (!apiRes.isLoading && apiRes.data != null) {
+            if (rememberMe) {
+                console.log('remember me')
+            }
+            navigate("/user/12")
         }
-        navigate("/user/12")
-    }
+    },[setFormErrorMessagehtml, apiRes])
+    
 
 
     return (
