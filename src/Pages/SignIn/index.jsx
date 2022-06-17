@@ -29,10 +29,8 @@ function SignIn({apiRes, apiCall}) {
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
     errors.password? userPWError = <p className="error-message">{errors.password.message}</p> : userPWError = ''
 
-
     useEffect(() => {
-        if (apiRes.error && apiRes.error > -1) {
-            console.log(apiRes.error)
+        if (apiRes.error) {
             setFormErrorMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
         } else if (!apiRes.isLoading && apiRes.data != null) {
             if (rememberMe) {

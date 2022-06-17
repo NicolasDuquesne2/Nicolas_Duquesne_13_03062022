@@ -33,7 +33,17 @@ export const apiCall = (data) => {
             dispatch(postIdSuccess(res))
         })
         .catch(err => {
-            dispatch(postIdFail(err.response.status))
+
+            switch (err.code) {
+                case "ERR_NETWORK":
+                    dispatch(postIdFail(err.message))
+                    break
+                case "ERR_BAD_REQUEST":
+                    dispatch(postIdFail(err.response.data.message))
+                    break
+                default:
+                    dispatch(postIdFail("Login has failed. Please try later"))
+            }
         })
     }
 }

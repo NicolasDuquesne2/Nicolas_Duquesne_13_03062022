@@ -17,7 +17,7 @@ const logInReducer = (state= initialStateID, action) => {
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload.data.body.token,
+                data: action.payload,
                 error: ''
             }
         case POST_ID_FAIL:
