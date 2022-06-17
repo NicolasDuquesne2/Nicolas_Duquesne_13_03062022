@@ -9,17 +9,17 @@ import './header.css'
 
     
 
-function Header(signOut, userId) {
+function Header({signOut, userId}) {
 
     let signElement = ''
     let userLinkElement = ''
 
-    if (signOut.signOut) {
+    if (signOut) {
         signElement = <SignOut />
         userLinkElement = <UserLink userId={userId}/>
     }
 
-    if (!signOut.signOut) {
+    if (!signOut) {
         signElement = <SignIn />
     }
 

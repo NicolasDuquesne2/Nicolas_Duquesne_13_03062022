@@ -44,7 +44,7 @@ function SignIn({apiRes, apiCall}) {
 
     return (
         <React.Fragment>
-            <Header signOut={false}/>
+            <Header signOut={false} />
             <main className="main bg-dark">
             <section className="sign-in-content">
                 <FontAwesomeIcon icon={faCircleUser} />

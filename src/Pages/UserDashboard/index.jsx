@@ -14,7 +14,6 @@ function UserDashboard(props) {
     const apiResLog = props.apiResLog
     const apiResProf = props.apiResProf
     const apiCall = props.apiCall
-
     const { id } = useParams()
 
     const accounts = [
@@ -82,9 +81,7 @@ function UserDashboard(props) {
         if (apiResProf.isLoading) {
             console.log('loading')
         }else if (apiResProf.error) {
-            return (
-                console.log(apiResProf.error)
-            )
+            console.log(apiResProf.error)
         } else if (!apiResProf.isLoading && apiResProf.data != null) {
             console.log(apiResProf)  
         }
