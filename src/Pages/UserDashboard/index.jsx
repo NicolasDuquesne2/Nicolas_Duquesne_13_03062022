@@ -16,7 +16,6 @@ function UserDashboard(props) {
     const apiResProf = props.apiResProf
     const apiCall = props.apiCall
     const { id } = useParams()
-    console.log(apiResProf.error)
     const formErrorMessage = useErrorsMessages(apiResProf.error)
     const [formMessagehtml, setFormMessagehtml] = useState(null)
 
@@ -39,11 +38,9 @@ function UserDashboard(props) {
     ]
 
 
-    const { register, handleSubmit, setError ,formState: {errors} } = useForm()
+    const { register, handleSubmit , setValue,formState: {errors} } = useForm()
     const editForm = useRef(null)
     const editButton = useRef(null)
-    const nameInput = useRef(null)
-    const fisrtNameInput = useRef(null)
     let nameErrhtml = ""
     let firstNameErrhtml = ""
 
@@ -60,8 +57,8 @@ function UserDashboard(props) {
         editForm.current.classList.remove("visible")
         editButton.current.classList.add("edit-button")
         editButton.current.classList.remove("unvisible")
-        nameInput.current.value = ""
-        fisrtNameInput.current.value = ""
+        setValue("firstName", "")
+        setValue("lastName", "")
     }
     
     const onSubmit = ({firstName, lastName}) => {
@@ -72,8 +69,6 @@ function UserDashboard(props) {
         headers: {
             Authorization: `Bearer ${apiResLog.data}`
         }}
-
-        console.log(apiResLog)
         apiCall(dataParams)
     }
 
@@ -111,14 +106,14 @@ function UserDashboard(props) {
                     <h1 className="header-title">Welcome back<br />Tony Jarvis!</h1>
                     <button className="edit-button" onClick={clickEditName} ref={editButton}>Edit Name</button>
                     {formMessagehtml}
-                    <form className="visible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>
+                    <form className="unvisible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>
                         <div className="left-wrapper">
-                            <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput} {...register("firstName", {required: "Please, enter a valid first name"})}/>
+                            <input className ="name-input" type="text" id="firstname" placeholder='First Name' {...register("firstName", {required: "Please, enter a valid first name"})}/>
                             {firstNameErrhtml}
                             <input type="submit" className="name-button" value="Save"/>
                         </div>
                         <div className="right-wrapper">
-                            <input className ="name-input" type="text" id="name" placeholder='Name' ref={nameInput} {...register("lastName", {required: "Please, enter a valid name"})}/>
+                            <input className ="name-input" type="text" id="name" placeholder='Name' {...register("lastName", {required: "Please, enter a valid name"})}/>
                             {nameErrhtml}
                             <button className="name-button" onClick={clickEditCancel}>Cancel</button>
                         </div>
