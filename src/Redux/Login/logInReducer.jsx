@@ -24,7 +24,7 @@ const logInReducer = (state= initialStateID, action) => {
             return {
                 ...state,
                 isLoading: false,
-                data: [],
+                data: null,
                 error: action.payload
             }
         default:

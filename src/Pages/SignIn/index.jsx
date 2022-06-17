@@ -32,7 +32,8 @@ function SignIn({apiRes, apiCall}) {
 
 
     useEffect(() => {
-        if (apiRes.error) {
+        if (apiRes.error > -1) {
+            console.log(apiRes.error)
             setFormErrorMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
         } else if (!apiRes.isLoading && apiRes.data != null) {
             if (rememberMe) {

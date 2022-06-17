@@ -5,8 +5,8 @@ export default function useErrorsMessages(type) {
             return ("Your email or your password is missing")
         case 401:
             return ("Please Enter a valid username and password")
-        case 500:
-            return ("The server does not response")
+        case 0:
+            return ("The server does not respond")
         default:
     }
 }
