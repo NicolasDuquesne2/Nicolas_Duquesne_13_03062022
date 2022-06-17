@@ -1,10 +1,12 @@
 import React from 'react'
+import { connect } from "react-redux/es/exports"
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
+import Error from '../../Components/Error'
 import AccountOperation from '../../Components/AccountOperation'
 import './account.css'
 
-function AccountDetail() {
+function AccountDetail({apiResLog}) {
 
     const dataTitle = {
         title:"Argent Bank Checking (x8349)",
@@ -51,6 +53,17 @@ function AccountDetail() {
         }
     ]
 
+
+    if (!apiResLog.isLoading && apiResLog.data === null) {
+        return (
+            <React.Fragment>
+                <Header signOut={false} />
+                <Error type="401" />
+                <Footer />
+            </React.Fragment>
+        )
+    }
+
     return (
         <React.Fragment>
             <Header signOut={true}/>
@@ -86,4 +99,10 @@ function AccountDetail() {
 }
 
 
-export default AccountDetail
+const mapStateToProps = state => {
+    return {
+        apiResLog: state.logInReducer
+    }
+}
+
+export default connect(mapStateToProps)(AccountDetail)
