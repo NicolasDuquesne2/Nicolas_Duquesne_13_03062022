@@ -1,10 +1,11 @@
-import React, {useRef, useEffect }from 'react'
+import React, {useRef, useEffect, useState }from 'react'
 import { useParams } from 'react-router-dom'
 import { connect } from "react-redux/es/exports"
 import { useForm } from "react-hook-form"
 import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
 import Error from '../../Components/Error'
+import useErrorsMessages from '../../Hooks/ErrorsMessages'
 import AccountCard from '../../Components/AccountCard'
 import { apiCall } from '../../Redux/Profile/action'
 import './dashboard.css'
@@ -15,6 +16,9 @@ function UserDashboard(props) {
     const apiResProf = props.apiResProf
     const apiCall = props.apiCall
     const { id } = useParams()
+    console.log(apiResProf.error)
+    const formErrorMessage = useErrorsMessages(apiResProf.error)
+    const [formMessagehtml, setFormMessagehtml] = useState(null)
 
     const accounts = [
         {
@@ -69,7 +73,7 @@ function UserDashboard(props) {
             Authorization: `Bearer ${apiResLog.data}`
         }}
 
-        console.log(dataParams)
+        console.log(apiResLog)
         apiCall(dataParams)
     }
 
@@ -78,14 +82,15 @@ function UserDashboard(props) {
     errors.lastName? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
 
     useEffect(() => {
-        if (apiResProf.isLoading) {
-            console.log('loading')
-        }else if (apiResProf.error) {
-            console.log(apiResProf.error)
+        if (apiResProf.error) {
+            setFormMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
         } else if (!apiResProf.isLoading && apiResProf.data != null) {
-            console.log(apiResProf)  
+            setFormMessagehtml(<p className="succes-message-form">First name and name have been successfully modified</p>)
+            setTimeout(() => {
+                setFormMessagehtml(null)
+            }, 2000)
         }
-    }, [apiResProf])
+    }, [setFormMessagehtml, apiResProf])
 
 
     if (!apiResLog.isLoading && apiResLog.data === null) {
@@ -105,6 +110,7 @@ function UserDashboard(props) {
                 <div className="header">
                     <h1 className="header-title">Welcome back<br />Tony Jarvis!</h1>
                     <button className="edit-button" onClick={clickEditName} ref={editButton}>Edit Name</button>
+                    {formMessagehtml}
                     <form className="visible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>
                         <div className="left-wrapper">
                             <input className ="name-input" type="text" id="firstname" placeholder='First Name' ref={fisrtNameInput} {...register("firstName", {required: "Please, enter a valid first name"})}/>

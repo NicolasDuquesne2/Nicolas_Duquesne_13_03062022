@@ -30,7 +30,7 @@ export const apiCall = (data) => {
 
         axios(data)
         .then(res => {
-            dispatch(postIdSuccess(res))
+            dispatch(postIdSuccess(res.data.body.token))
         })
         .catch(err => {
 

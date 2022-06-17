@@ -48,6 +48,15 @@ min-height: 100vh;
 .error-message-form {
     background: rgb(212, 81, 81);
     padding: 10px;
+    color: #12002b;
     font-weight: 600;
     text-align: center;
 } 
+
+.succes-message-form {
+    padding: 10px;
+    font-weight: 600;
+    text-align: center;
+    background: rgb(58, 193, 58);
+    color: #12002b;
+}

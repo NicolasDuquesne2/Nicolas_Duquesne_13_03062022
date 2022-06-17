@@ -33,7 +33,16 @@ export const apiCall = (data) => {
             dispatch(putProfileSuccess(res))
         })
         .catch(err => {
-            dispatch(putProfileFail(err.message))
+            switch (err.code) {
+                case "ERR_NETWORK":
+                    dispatch(putProfileFail(err.message))
+                    break
+                case "ERR_BAD_REQUEST":
+                    dispatch(putProfileFail(err.response.data.message))
+                    break
+                default:
+                    dispatch(putProfileFail("The new name and new first name have not been sent. Please try later"))
+            }
         })
     }
 }
