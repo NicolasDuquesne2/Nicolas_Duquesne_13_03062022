@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from "react-redux/es/exports"
+import { useNavigate } from 'react-router-dom'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import Error from '../../Components/Error'
@@ -7,6 +8,9 @@ import AccountOperation from '../../Components/AccountOperation'
 import './account.css'
 
 function AccountDetail({apiResLog}) {
+
+
+    let navigate = useNavigate()
 
     const dataTitle = {
         title:"Argent Bank Checking (x8349)",
@@ -54,15 +58,12 @@ function AccountDetail({apiResLog}) {
     ]
 
 
-    if (!apiResLog.isLoading && apiResLog.data === null) {
-        return (
-            <React.Fragment>
-                <Header signOut={false} />
-                <Error type="401" />
-                <Footer />
-            </React.Fragment>
-        )
-    }
+    useEffect(() => {
+        if (!apiResLog.isLoading && apiResLog.data === null) {
+            navigate("/sign-in")
+        }
+
+    },[])
 
     return (
         <React.Fragment>

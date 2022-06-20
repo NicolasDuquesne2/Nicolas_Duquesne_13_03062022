@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState }from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { connect } from "react-redux/es/exports"
 import { useForm } from "react-hook-form"
 import Footer from '../../Components/Footer'
@@ -43,6 +43,7 @@ function UserDashboard(props) {
     const editButton = useRef(null)
     let nameErrhtml = ""
     let firstNameErrhtml = ""
+    let navigate = useNavigate()
 
     function clickEditName(e) {
         editForm.current.classList.add("visible")
@@ -77,6 +78,12 @@ function UserDashboard(props) {
     errors.lastName? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
 
     useEffect(() => {
+
+        if (!apiResLog.isLoading && apiResLog.data === null) {
+            navigate("/sign-in")
+        }
+
+
         if (apiResProf.error) {
             setFormMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
         } else if (!apiResProf.isLoading && apiResProf.data != null) {
@@ -87,16 +94,6 @@ function UserDashboard(props) {
         }
     }, [setFormMessagehtml, apiResProf])
 
-
-    if (!apiResLog.isLoading && apiResLog.data === null) {
-        return (
-            <React.Fragment>
-                <Header signOut={false} />
-                <Error type="401" />
-                <Footer />
-            </React.Fragment>
-        )
-    }
 
     return (
         <React.Fragment>
