@@ -1,20 +1,19 @@
 import React, {useRef, useEffect, useState }from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { connect } from "react-redux/es/exports"
+import { useSelector, useDispatch } from "react-redux/es/exports"
 import { useForm } from "react-hook-form"
 import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
-import Error from '../../Components/Error'
 import useErrorsMessages from '../../Hooks/ErrorsMessages'
 import AccountCard from '../../Components/AccountCard'
 import { apiCall } from '../../Redux/Profile/action'
 import './dashboard.css'
 
-function UserDashboard(props) {
+function UserDashboard() {
 
-    const apiResLog = props.apiResLog
-    const apiResProf = props.apiResProf
-    const apiCall = props.apiCall
+    const apiResLog = useSelector(state => state.logInReducer)
+    const apiResProf = useSelector(state => state.profileReducer)
+    const dispatch = useDispatch()
     const { id } = useParams()
     const formErrorMessage = useErrorsMessages(apiResProf.error)
     const [formMessagehtml, setFormMessagehtml] = useState(null)
@@ -70,7 +69,7 @@ function UserDashboard(props) {
         headers: {
             Authorization: `Bearer ${apiResLog.data}`
         }}
-        apiCall(dataParams)
+        dispatch(apiCall(dataParams))
     }
 
 
@@ -130,18 +129,5 @@ function UserDashboard(props) {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        apiResLog: state.logInReducer,
-        apiResProf: state.profileReducer
-    }
-}
 
-
-const mapDispatchToProps = dispatch => {
-    return {
-        apiCall: (data) => dispatch(apiCall(data))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserDashboard)
+export default UserDashboard

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { connect } from "react-redux/es/exports"
+import { useSelector, useDispatch } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
@@ -10,9 +10,13 @@ import Footer from "../../Components/Footer"
 import useErrorsMessages from "../../Hooks/ErrorsMessages"
 import './signin.css'
 
-function SignIn({apiRes, apiCall}) {
+function SignIn() {
 
-    const { register, handleSubmit, setError ,formState: {errors} } = useForm()
+
+    const apiRes = useSelector(state => state.logInReducer)
+    const dispatch = useDispatch() 
+    const { register, handleSubmit ,formState: {errors} } = useForm()
+
     let navigate = useNavigate()
     let userNameError = ''
     let userPWError = ''
@@ -23,7 +27,7 @@ function SignIn({apiRes, apiCall}) {
     const onSubmit = ({username, password, rememberMe}) => {
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
         setRememberMe(rememberMe)
-        apiCall(dataParams)
+        dispatch(apiCall(dataParams))
     }
 
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''
@@ -74,17 +78,5 @@ function SignIn({apiRes, apiCall}) {
     )
 }
 
-const mapStateToProps = state => {
-    return {
-        apiRes: state.logInReducer
-    }
-}
 
-
-const mapDispatchToProps = dispatch => {
-    return {
-        apiCall: (data) => dispatch(apiCall(data))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default SignIn
