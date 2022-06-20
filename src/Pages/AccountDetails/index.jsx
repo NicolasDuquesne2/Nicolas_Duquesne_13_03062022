@@ -3,7 +3,6 @@ import { connect } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
-import Error from '../../Components/Error'
 import AccountOperation from '../../Components/AccountOperation'
 import './account.css'
 
@@ -59,7 +58,9 @@ function AccountDetail({apiResLog}) {
 
 
     useEffect(() => {
-        if (!apiResLog.isLoading && apiResLog.data === null) {
+        const token = localStorage.getItem('token')
+
+        if (!apiResLog.isLoading && !token) {
             navigate("/sign-in")
         }
 

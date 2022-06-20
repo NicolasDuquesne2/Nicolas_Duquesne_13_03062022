@@ -40,6 +40,7 @@ function SignIn() {
             if (rememberMe) {
                 console.log('remember me')
             }
+            localStorage.setItem('token', apiRes.data);
             navigate("/user/12")
         }
     },[setFormErrorMessagehtml, apiRes])

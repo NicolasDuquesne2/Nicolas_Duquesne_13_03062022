@@ -78,7 +78,9 @@ function UserDashboard() {
 
     useEffect(() => {
 
-        if (!apiResLog.isLoading && apiResLog.data === null) {
+        const token = localStorage.getItem('token')
+
+        if (!apiResLog.isLoading && !token) {
             navigate("/sign-in")
         }
 
