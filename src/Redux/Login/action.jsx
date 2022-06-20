@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { useAxios } from '../../Hooks/Axios'
 import {POST_ID, POST_ID_SUCCES, POST_ID_FAIL } from './type'
 
 const postId = () => {
@@ -28,23 +28,12 @@ export const apiCall = (data) => {
 
         dispatch(postId())
 
-        axios(data)
-        .then(res => {
-            dispatch(postIdSuccess(res.data.body.token))
-        })
-        .catch(err => {
+        const defaultErrMessage = "Login has failed. Please try later"
 
-            switch (err.code) {
-                case "ERR_NETWORK":
-                    dispatch(postIdFail(err.message))
-                    break
-                case "ERR_BAD_REQUEST":
-                    dispatch(postIdFail(err.response.data.message))
-                    break
-                default:
-                    dispatch(postIdFail("Login has failed. Please try later"))
-            }
-        })
+        const dataFetch = useAxios(data, defaultErrMessage)
+        dataFetch
+        .then(res => dispatch(postIdSuccess(res.data.body.token)))
+        .catch(err => dispatch(postIdFail(err)))
     }
 }
 
