@@ -11,8 +11,6 @@ import useErrorsMessages from "../../Hooks/ErrorsMessages"
 import './signin.css'
 
 function SignIn() {
-
-
     const apiRes = useSelector(state => state.logInReducer)
     const dispatch = useDispatch() 
     const { register, handleSubmit ,formState: {errors} } = useForm()
@@ -40,7 +38,7 @@ function SignIn() {
             if (rememberMe) {
                 console.log('remember me')
             }
-            localStorage.setItem('token', apiRes.data);
+            localStorage.setItem('token', apiRes.data)
             navigate("/user/12")
         }
     },[setFormErrorMessagehtml, apiRes])

@@ -6,6 +6,7 @@ import Footer from "../../Components/Footer"
 
 
 function Home () {
+    localStorage.removeItem('token')
 
     return (
         <React.Fragment>

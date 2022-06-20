@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleUser, faSignOut } from '@fortawesome/free-solid-svg-icons'
 import logo from '../../img/argentBankLogo.png'
 import SignOut from '../SignOut'
 import SignIn from '../SignIn'
