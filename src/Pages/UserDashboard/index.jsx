@@ -37,6 +37,9 @@ function UserDashboard() {
     ]
 
 
+    // local storage debug
+    console.log(localStorage.getItem('mailPw'))
+
     const { register, handleSubmit , setValue,formState: {errors} } = useForm()
     const editForm = useRef(null)
     const editButton = useRef(null)

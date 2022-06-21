@@ -26,14 +26,15 @@ export const apiCall = (data) => {
 
     return dispatch => {
 
-        dispatch(postId())
-
         const defaultErrMessage = "Login has failed. Please try later"
+        dispatch(postId())
 
         const dataFetch = useAxios(data, defaultErrMessage)
         dataFetch
-        .then(res => dispatch(postIdSuccess(res.data.body.token)))
-        .catch(err => dispatch(postIdFail(err)))
+        .then(res => {
+            res.error? dispatch(postIdFail(res.error)): dispatch(postIdSuccess(res.data.body.token))
+        })
+        .catch(err => console.log(err))
+
     }
 }
-

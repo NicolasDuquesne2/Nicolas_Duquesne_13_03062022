@@ -13,7 +13,7 @@ import './signin.css'
 function SignIn() {
     const apiRes = useSelector(state => state.logInReducer)
     const dispatch = useDispatch() 
-    const { register, handleSubmit ,formState: {errors} } = useForm()
+    const { register, handleSubmit , setValue, formState: {errors} } = useForm()
 
     let navigate = useNavigate()
     let userNameError = ''
@@ -21,10 +21,18 @@ function SignIn() {
     const formErrorMessage = useErrorsMessages(apiRes.error)
     const [formErrorMessagehtml, setFormErrorMessagehtml] = useState(null)
     const [rememberMe, setRememberMe] = useState(false)
+    const [ids, setIds] = useState(null)
+
+    /**if (localStorage.getItem('mail') && localStorage.getItem('pw')) {
+        const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: localStorage.getItem('mail'), password: localStorage.getItem('pw')}}
+        dispatch(apiCall(dataParams))
+    }*/
+
 
     const onSubmit = ({username, password, rememberMe}) => {
+        rememberMe? setRememberMe(true): setRememberMe(false)
+        setIds({username, password})
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
-        setRememberMe(rememberMe)
         dispatch(apiCall(dataParams))
     }
 
@@ -35,13 +43,25 @@ function SignIn() {
         if (apiRes.error) {
             setFormErrorMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
         } else if (!apiRes.isLoading && apiRes.data != null) {
-            if (rememberMe) {
-                console.log('remember me')
-            }
             localStorage.setItem('token', apiRes.data)
+            if (rememberMe) {
+                localStorage.setItem('mail', ids.username)
+                localStorage.setItem('pw', ids.password)
+            } else {
+                localStorage.removeItem('mail')
+                localStorage.removeItem('pw')
+            }
             navigate("/user/12")
+        } 
+
+        if (apiRes.data === null && localStorage.getItem('mail') && localStorage.getItem('pw')) {
+            setValue("rememberMe", true)
+            setValue("username", localStorage.getItem('mail'))
+            setValue("password", localStorage.getItem('pw'))
         }
-    },[setFormErrorMessagehtml, apiRes])
+
+
+    },[apiRes])
     
 
 

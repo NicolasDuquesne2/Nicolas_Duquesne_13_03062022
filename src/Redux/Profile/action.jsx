@@ -30,8 +30,10 @@ export const apiCall = (data) => {
         const defaultErrMessage = "The new name and new first name have not been sent. Please try later"
         const dataFetch = useAxios(data, defaultErrMessage)
         dataFetch
-        .then(res => dispatch(putProfileSuccess(res)))
-        .catch(err => dispatch(putProfileFail(err)))
+        .then(res => {
+            res.error? dispatch(putProfileFail(res.error)): dispatch(putProfileSuccess(res))
+        })
+        .catch(err => console.log(err))
     }
 }
 
