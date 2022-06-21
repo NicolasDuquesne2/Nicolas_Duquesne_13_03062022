@@ -3,11 +3,13 @@ import logInReducer from './Login/logInReducer'
 import profileReducer from './Profile/profileReducer'
 import ErrMessHtmlReducer from './FormErrMessHTML/ErrMesshtmlReducer'
 import RememberMeReducer from './RememberMe/RememberMeReducer'
+import IdsReducer from './Ids/IdsReducer'
 import thunk from 'redux-thunk'
 
 const rootReducer = combineReducers({
     ErrMessHtmlReducer,
     RememberMeReducer,
+    IdsReducer,
     logInReducer,
     profileReducer
 })
