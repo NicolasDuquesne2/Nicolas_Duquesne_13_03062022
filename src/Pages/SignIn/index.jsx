@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { apiCall } from '../../Redux/Login/action'
+import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import useErrorsMessages from "../../Hooks/ErrorsMessages"
@@ -12,6 +13,8 @@ import './signin.css'
 
 function SignIn() {
     const apiRes = useSelector(state => state.logInReducer)
+    const formErrorMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
+    console.log(formErrorMessagehtml)
     const dispatch = useDispatch() 
     const { register, handleSubmit , setValue, formState: {errors} } = useForm()
 
@@ -19,7 +22,6 @@ function SignIn() {
     let userNameError = ''
     let userPWError = ''
     const formErrorMessage = useErrorsMessages(apiRes.error)
-    const [formErrorMessagehtml, setFormErrorMessagehtml] = useState(null)
     const [rememberMe, setRememberMe] = useState(false)
     const [ids, setIds] = useState(null)
 
@@ -41,7 +43,7 @@ function SignIn() {
 
     useEffect(() => {
         if (apiRes.error) {
-            setFormErrorMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
+            dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
         } else if (!apiRes.isLoading && apiRes.data != null) {
             localStorage.setItem('token', apiRes.data)
             if (rememberMe) {

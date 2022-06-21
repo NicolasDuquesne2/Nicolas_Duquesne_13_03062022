@@ -1,0 +1,1 @@
+export const ERR_MESSAGE_HTML = "ERR_MESSAGE_HTML"
