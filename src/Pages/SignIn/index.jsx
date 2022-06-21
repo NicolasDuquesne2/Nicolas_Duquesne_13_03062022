@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { apiCall } from '../../Redux/Login/action'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
+import { setRememberMe } from "../../Redux/RememberMe/action"
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import useErrorsMessages from "../../Hooks/ErrorsMessages"
@@ -14,7 +15,7 @@ import './signin.css'
 function SignIn() {
     const apiRes = useSelector(state => state.logInReducer)
     const formErrorMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
-    console.log(formErrorMessagehtml)
+    const rememberMe = useSelector(state => state.RememberMeReducer.data)
     const dispatch = useDispatch() 
     const { register, handleSubmit , setValue, formState: {errors} } = useForm()
 
@@ -22,7 +23,6 @@ function SignIn() {
     let userNameError = ''
     let userPWError = ''
     const formErrorMessage = useErrorsMessages(apiRes.error)
-    const [rememberMe, setRememberMe] = useState(false)
     const [ids, setIds] = useState(null)
 
     /**if (localStorage.getItem('mail') && localStorage.getItem('pw')) {
@@ -32,7 +32,7 @@ function SignIn() {
 
 
     const onSubmit = ({username, password, rememberMe}) => {
-        rememberMe? setRememberMe(true): setRememberMe(false)
+        rememberMe? dispatch(setRememberMe(true)): dispatch(setRememberMe(false))
         setIds({username, password})
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
         dispatch(apiCall(dataParams))
