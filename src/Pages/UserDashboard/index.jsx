@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState }from 'react'
+import React, {useRef, useEffect }from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux/es/exports"
 import { useForm } from "react-hook-form"
@@ -7,16 +7,17 @@ import Header from '../../Components/Header'
 import useErrorsMessages from '../../Hooks/ErrorsMessages'
 import AccountCard from '../../Components/AccountCard'
 import { apiCall } from '../../Redux/Profile/action'
+import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import './dashboard.css'
 
 function UserDashboard() {
 
     const apiResLog = useSelector(state => state.logInReducer)
     const apiResProf = useSelector(state => state.profileReducer)
+    const formMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
     const dispatch = useDispatch()
     const { id } = useParams()
     const formErrorMessage = useErrorsMessages(apiResProf.error)
-    const [formMessagehtml, setFormMessagehtml] = useState(null)
 
     const accounts = [
         {
@@ -89,14 +90,14 @@ function UserDashboard() {
 
 
         if (apiResProf.error) {
-            setFormMessagehtml(<p className="error-message-form">{formErrorMessage}</p>)
+            dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
         } else if (!apiResProf.isLoading && apiResProf.data != null) {
-            setFormMessagehtml(<p className="succes-message-form">First name and name have been successfully modified</p>)
+            dispatch(setErrMessHtml(<p className="succes-message-form">First name and name have been successfully modified</p>))
             setTimeout(() => {
-                setFormMessagehtml(null)
+                dispatch(setErrMessHtml(null))
             }, 2000)
         }
-    }, [setFormMessagehtml, apiResProf])
+    }, [apiResProf])
 
 
     return (
