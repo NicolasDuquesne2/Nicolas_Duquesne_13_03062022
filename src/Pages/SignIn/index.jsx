@@ -19,9 +19,8 @@ function SignIn() {
     const rememberMe = useSelector(state => state.RememberMeReducer.data)
     const ids = useSelector(state => state.IdsReducer.data)
     const dispatch = useDispatch() 
-    const { register, handleSubmit , setValue, formState: {errors} } = useForm()
-
     let navigate = useNavigate()
+    const { register, handleSubmit , setValue, formState: {errors} } = useForm()
     let userNameError = ''
     let userPWError = ''
     const formErrorMessage = useErrorsMessages(apiRes.error)
@@ -39,6 +38,7 @@ function SignIn() {
 
     useEffect(() => {
         if (apiRes.error) {
+            dispatch(setIds(null))
             dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
         } else if (!apiRes.isLoading && apiRes.data != null) {
             localStorage.setItem('token', apiRes.data)
@@ -73,7 +73,7 @@ function SignIn() {
                 {formErrorMessagehtml}
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="input-wrapper">
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="username">E-mail</label>
                         <input type="text" id="username" {...register("username", {required: "Please, enter a valid email"})}/>
                         {userNameError}
                     </div>
@@ -88,6 +88,9 @@ function SignIn() {
                     </div>
                     <input type="submit" className="sign-in-button" value="Sign in"/>
                 </form>
+                <div className="SignIn-footer">
+                    <a href="/sign-up">First-Time User</a>
+                </div>
             </section>
             </main>
             <Footer />

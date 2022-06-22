@@ -1,7 +1,7 @@
 import { IDS } from "./type"
 
 const initialStateID = {
-    data: {}
+    data: null
 }
 
 const IdsReducer = (state= initialStateID, action) => {
