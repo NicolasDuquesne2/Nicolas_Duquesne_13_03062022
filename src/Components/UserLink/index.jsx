@@ -15,7 +15,7 @@ function UserLink({userId}) {
     }
 
     return (
-        <a className="main-nav-item" href={`${userId}`}>
+        <a className="main-nav-item" href={`/user/${userId}`}>
             <FontAwesomeIcon icon= {faCircleUser} />
             {profileName}
         </a>

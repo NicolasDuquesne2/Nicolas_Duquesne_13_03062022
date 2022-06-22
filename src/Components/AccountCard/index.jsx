@@ -2,15 +2,15 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './account.css'
 
-function AccountCard(account) {
-    const config = account.account
+function AccountCard({account, id}) {
+    const config = account
     const transactButton = useRef(null)
     let navigate = useNavigate()
 
     
     function clickTransactionButton(e) {
         e.preventDefault()
-        navigate('/user/12/details')
+        navigate(`/user/${id}/details`)
     }
 
     return (

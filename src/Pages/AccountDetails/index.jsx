@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from "react-redux/es/exports"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import Header from '../../Components/Header'
 import Footer from '../../Components/Footer'
 import AccountOperation from '../../Components/AccountOperation'
@@ -8,7 +8,7 @@ import './account.css'
 
 function AccountDetail({apiResLog}) {
 
-
+    const { id } = useParams()
     let navigate = useNavigate()
 
     const dataTitle = {
@@ -68,7 +68,7 @@ function AccountDetail({apiResLog}) {
 
     return (
         <React.Fragment>
-            <Header signOut={true}/>
+            <Header signOut={true} userId={id}/>
             <main className="main bg-dark">
                 <div className='header-detail'>
                     <h3 className="account-title">{dataTitle.title}</h3>

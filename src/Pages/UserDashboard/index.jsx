@@ -132,6 +132,7 @@ function UserDashboard() {
                     <AccountCard 
                         key={`account-${index}`}
                         account={account}
+                        id={id}
                     />
                 ))}
             </main>
