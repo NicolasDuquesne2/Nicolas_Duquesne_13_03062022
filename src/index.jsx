@@ -12,7 +12,6 @@ import ErrorPage from './Pages/Error';
 
 const root = createRoot(document.getElementById('root'));
 
-//<Provider store={module store importé}>
 root.render(
   <Router >
       <Provider store={store}>

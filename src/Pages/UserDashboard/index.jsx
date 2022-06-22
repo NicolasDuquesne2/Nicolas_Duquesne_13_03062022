@@ -7,6 +7,7 @@ import Header from '../../Components/Header'
 import useErrorsMessages from '../../Hooks/ErrorsMessages'
 import AccountCard from '../../Components/AccountCard'
 import { apiCall } from '../../Redux/Profile/action'
+import { setProfileInfos } from '../../Redux/ProfileInfos/action'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import './dashboard.css'
 
@@ -15,9 +16,11 @@ function UserDashboard() {
     const apiResLog = useSelector(state => state.logInReducer)
     const apiResProf = useSelector(state => state.profileReducer)
     const formMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
+    const profileInfos = useSelector(state => state.ProfileInfosReducer.data)
     const dispatch = useDispatch()
     const { id } = useParams()
     const formErrorMessage = useErrorsMessages(apiResProf.error)
+    let nametext = "Tony Jarvis!"
 
     const accounts = [
         {
@@ -37,9 +40,6 @@ function UserDashboard() {
         }
     ]
 
-
-    // local storage debug
-    console.log(localStorage.getItem('mailPw'))
 
     const { register, handleSubmit , setValue,formState: {errors} } = useForm()
     const editForm = useRef(null)
@@ -66,14 +66,19 @@ function UserDashboard() {
     }
     
     const onSubmit = ({firstName, lastName}) => {
+        const token = apiResLog.data? apiResLog.data: localStorage.getItem("token")
        const dataParams = {
         method: 'put', 
         url: 'http://localhost:3001/api/v1/user/profile', 
         data: {firstName, lastName}, 
         headers: {
-            Authorization: `Bearer ${apiResLog.data}`
+            Authorization: `Bearer ${token}`
         }}
         dispatch(apiCall(dataParams))
+    }
+
+    if (profileInfos) {
+        nametext = `${profileInfos.firstName} ${profileInfos.lastName}!`
     }
 
 
@@ -96,6 +101,7 @@ function UserDashboard() {
             setTimeout(() => {
                 dispatch(setErrMessHtml(null))
             }, 2000)
+            dispatch(setProfileInfos({firstName: apiResProf.data.data.body.firstName, lastName: apiResProf.data.data.body.lastName}))
         }
     }, [apiResProf])
 
@@ -105,7 +111,7 @@ function UserDashboard() {
             <Header signOut={true} userId={id}/>
             <main className="main bg-dark">
                 <div className="header">
-                    <h1 className="header-title">Welcome back<br />Tony Jarvis!</h1>
+                    <h1 className="header-title">Welcome back<br />{nametext}</h1>
                     <button className="edit-button" onClick={clickEditName} ref={editButton}>Edit Name</button>
                     {formMessagehtml}
                     <form className="unvisible edit-name" ref={editForm} onSubmit={handleSubmit(onSubmit)}>

@@ -5,10 +5,12 @@ import ErrMessHtmlReducer from './FormErrMessHTML/ErrMesshtmlReducer'
 import RememberMeReducer from './RememberMe/RememberMeReducer'
 import IdsReducer from './Ids/IdsReducer'
 import thunk from 'redux-thunk'
+import ProfileInfosReducer from './ProfileInfos/profileInfosReducer'
 
 const rootReducer = combineReducers({
     ErrMessHtmlReducer,
     RememberMeReducer,
+    ProfileInfosReducer,
     IdsReducer,
     logInReducer,
     profileReducer
