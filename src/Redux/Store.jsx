@@ -4,6 +4,7 @@ import profileReducer from './Profile/profileReducer'
 import ErrMessHtmlReducer from './FormErrMessHTML/ErrMesshtmlReducer'
 import RememberMeReducer from './RememberMe/RememberMeReducer'
 import IdsReducer from './Ids/IdsReducer'
+import SignUpReducer from './SignUp/signUpReducer'
 import thunk from 'redux-thunk'
 import ProfileInfosReducer from './ProfileInfos/profileInfosReducer'
 
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
     ProfileInfosReducer,
     IdsReducer,
     logInReducer,
-    profileReducer
+    profileReducer,
+    SignUpReducer
 })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))

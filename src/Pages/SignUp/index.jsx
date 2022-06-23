@@ -1,21 +1,28 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { useSelector, useDispatch } from "react-redux/es/exports"
+import { useNavigate } from 'react-router-dom'
 import useErrorsMessages from "../../Hooks/ErrorsMessages"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import { setRememberMe } from "../../Redux/RememberMe/action"
 import { setIds } from "../../Redux/Ids/action"
+import { apiCall } from "../../Redux/SignUp/action"
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 
 function SignUp() {
 
-    const { register, handleSubmit , setValue, formState: {errors} } = useForm()
+    const { register, handleSubmit, formState: {errors} } = useForm()
 
+    const apiRes = useSelector(state => state.SignUpReducer)
     const formErrorMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
+    const rememberMe = useSelector(state => state.RememberMeReducer.data)
+    const ids = useSelector(state => state.IdsReducer.data)
     const dispatch = useDispatch()
+    const formErrorMessage = useErrorsMessages(apiRes.error)
+    const navigate = useNavigate()
 
     let userFirstNameError = ''
     let userNameError = ''
@@ -24,12 +31,31 @@ function SignUp() {
 
     const onSubmit = ({userfirtsname, username, usermail , password, rememberMe}) => {
         rememberMe? dispatch(setRememberMe(true)): dispatch(setRememberMe(false))
-        dispatch(setIds({username, password}))
+        dispatch(setIds({usermail, password}))
         const dataParams = {method: 'post', 
                             url: 'http://localhost:3001/api/v1/user/signup', 
                             data: {email: usermail, password: password, firstName: userfirtsname, lastName: username}}
-        //dispatch(apiCall(dataParams))
+        dispatch(apiCall(dataParams))
     }
+
+
+    useEffect(() => {
+        if (apiRes.error) {
+            dispatch(setIds(null))
+            dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
+        } else if (!apiRes.isLoading && apiRes.data != null) {
+            localStorage.setItem('token', apiRes.data)
+            if (rememberMe) {
+                localStorage.setItem('mail', ids.username)
+                localStorage.setItem('pw', ids.password)
+            } else {
+                localStorage.removeItem('mail')
+                localStorage.removeItem('pw')
+            }
+            navigate("/sign-in")
+        } 
+
+    },[apiRes])
 
 
     errors.userfirtsname? userFirstNameError = <p className="error-message">{errors.userfirtsname.message}</p>: userFirstNameError = ''
