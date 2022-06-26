@@ -50,9 +50,9 @@ function SignIn() {
                 localStorage.removeItem('mail')
                 localStorage.removeItem('pw')
             }
-            
+
             const dataParams = {
-                method: 'put', 
+                method: 'post', 
                 url: 'http://localhost:3001/api/v1/user/profile', 
                 headers: {
                     Authorization: `Bearer ${apiRes.data}`

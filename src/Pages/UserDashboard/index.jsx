@@ -21,7 +21,7 @@ function UserDashboard() {
     const dispatch = useDispatch()
     const { id } = useParams()
     const formErrorMessage = useErrorsMessages(apiResProf.error)
-    let nametext = "Tony Jarvis!"
+    let nametext = ""
 
     const accounts = [
         {
@@ -111,9 +111,10 @@ function UserDashboard() {
 
 
     useEffect(() => {
+        console.log(apiResProfDatas)
 
-        if(!apiResProfDatas.error) {
-            console.log(apiResProfDatas.data)
+        if(!apiResProfDatas.isLoading && apiResProfDatas.data != null) {
+            //dispatch(setProfileInfos({firstName: apiResProfDatas.data.body.firstName, lastName: apiResProfDatas.data.body.lastName}))
         }
 
     }, [apiResProfDatas])
