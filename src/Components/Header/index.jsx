@@ -7,14 +7,14 @@ import './header.css'
 
     
 
-function Header({signOut, userId}) {
+function Header({ signOut }) {
 
     let signElement = ''
     let userLinkElement = ''
 
     if (signOut) {
         signElement = <SignOut />
-        userLinkElement = <UserLink userId={userId}/>
+        userLinkElement = <UserLink />
     }
 
     if (!signOut) {

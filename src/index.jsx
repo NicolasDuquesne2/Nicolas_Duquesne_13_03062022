@@ -20,8 +20,8 @@ root.render(
           <Route exact path="/" element={ <Home />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/user/:id" element={<UserDashboard />} />
-          <Route path="/user/:id/details" element={<AccountDetail />} />
+          <Route path="/user/" element={<UserDashboard />} />
+          <Route path="/user/details" element={<AccountDetail />} />
           <Route path="*" element ={<ErrorPage type="404"/>} />
         </Routes>
       </Provider>

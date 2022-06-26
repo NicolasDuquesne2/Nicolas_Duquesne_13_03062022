@@ -1,20 +1,19 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux/es/exports"
+import { useSelector } from "react-redux/es/exports"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
 
-function UserLink({userId}) {
+function UserLink() {
 
-    const ids = useSelector(state => state.profileReducer.data)
-    let profileName = "Tony"
+    const profileInfos = useSelector(state => state.ProfileInfosReducer.data)
+    let profileName = ""
 
-    if (ids) {
-        profileName = ids.data.body.firstName
+    if (profileInfos) {
+        profileName = profileInfos.firstName
     }
 
     return (
-        <a className="main-nav-item" href={`/user/${userId}`}>
+        <a className="main-nav-item" href={`/user`}>
             <FontAwesomeIcon icon= {faCircleUser} />
             {profileName}
         </a>

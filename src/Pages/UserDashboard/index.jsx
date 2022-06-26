@@ -19,7 +19,6 @@ function UserDashboard() {
     const formMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
     const profileInfos = useSelector(state => state.ProfileInfosReducer.data)
     const dispatch = useDispatch()
-    const { id } = useParams()
     const formErrorMessage = useErrorsMessages(apiResProf.error)
     let nametext = ""
 
@@ -106,6 +105,8 @@ function UserDashboard() {
                 dispatch(setErrMessHtml(null))
             }, 2000)
             dispatch(setProfileInfos({firstName: apiResProf.data.data.body.firstName, lastName: apiResProf.data.data.body.lastName}))
+            localStorage.setItem('firstName', apiResProf.data.data.body.firstName)
+            localStorage.setItem('lastName', apiResProf.data.data.body.lastName)
         }
     }, [apiResProf])
 
@@ -114,14 +115,18 @@ function UserDashboard() {
         console.log(apiResProfDatas)
 
         if(!apiResProfDatas.isLoading && apiResProfDatas.data != null) {
-            //dispatch(setProfileInfos({firstName: apiResProfDatas.data.body.firstName, lastName: apiResProfDatas.data.body.lastName}))
+            dispatch(setProfileInfos({firstName: apiResProfDatas.data.data.body.firstName, lastName: apiResProfDatas.data.data.body.lastName}))
+            localStorage.setItem('firstName', apiResProfDatas.data.data.body.firstName)
+            localStorage.setItem('lastName', apiResProfDatas.data.data.body.lastName)
+        } else if (localStorage.getItem('firstName') && localStorage.getItem('lastName')) {
+            dispatch(setProfileInfos({firstName: localStorage.getItem('firstName'), lastName: localStorage.getItem('lastName')}))
         }
 
     }, [apiResProfDatas])
 
     return (
         <React.Fragment>
-            <Header signOut={true} userId={id}/>
+            <Header signOut={true} />
             <main className="main bg-dark">
                 <div className="header">
                     <h1 className="header-title">Welcome back<br />{nametext}</h1>
@@ -145,7 +150,6 @@ function UserDashboard() {
                     <AccountCard 
                         key={`account-${index}`}
                         account={account}
-                        id={id}
                     />
                 ))}
             </main>

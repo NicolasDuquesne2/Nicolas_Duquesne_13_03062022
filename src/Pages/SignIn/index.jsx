@@ -58,7 +58,7 @@ function SignIn() {
                     Authorization: `Bearer ${apiRes.data}`
                 }}
             dispatch(setProfileDatas(dataParams))
-            navigate("/user/12")
+            navigate("/user")
         } 
 
         if (apiRes.data === null && localStorage.getItem('mail') && localStorage.getItem('pw')) {
