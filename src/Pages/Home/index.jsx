@@ -7,6 +7,8 @@ import Footer from "../../Components/Footer"
 
 function Home () {
     localStorage.removeItem('token')
+    localStorage.removeItem('firstName')
+    localStorage.removeItem('lastName')
 
     return (
         <React.Fragment>

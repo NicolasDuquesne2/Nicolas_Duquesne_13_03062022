@@ -6,10 +6,13 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 function UserLink() {
 
     const profileInfos = useSelector(state => state.ProfileInfosReducer.data)
+
     let profileName = ""
 
     if (profileInfos) {
         profileName = profileInfos.firstName
+    } else if( localStorage.getItem('firstName')) {
+        profileName = localStorage.getItem('firstName')
     }
 
     return (

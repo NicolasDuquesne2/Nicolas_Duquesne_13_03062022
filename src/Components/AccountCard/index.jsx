@@ -10,18 +10,18 @@ function AccountCard({account, id}) {
     
     function clickTransactionButton(e) {
         e.preventDefault()
-        navigate(`/user/${id}/details`)
+        navigate(`/user/details`)
     }
 
     return (
         <section className="account">
             <div className="account-content-wrapper">
-            <h3 className="account-title">{config.title}</h3>
-            <p className="account-amount">{config.amount}</p>
-            <p className="account-amount-description">{config.description}</p>
-            </div>
-            <div className="account-content-wrapper cta">
-            <button className="transaction-button" ref={transactButton} onClick={clickTransactionButton}>View transactions</button>
+                <h3 className="account-title">{config.title}</h3>
+                <p className="account-amount">{config.amount}</p>
+                <p className="account-amount-description">{config.description}</p>
+                </div>
+                <div className="account-content-wrapper cta">
+                <button className="transaction-button" ref={transactButton} onClick={clickTransactionButton}>View transactions</button>
             </div>
         </section>
     )
