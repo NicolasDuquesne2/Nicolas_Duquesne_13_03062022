@@ -15,6 +15,7 @@ function UserDashboard() {
 
     const apiResLog = useSelector(state => state.logInReducer)
     const apiResProf = useSelector(state => state.profileReducer)
+    const apiResProfDatas = useSelector(state => state.profileDatasReducer)
     const formMessagehtml = useSelector(state => state.ErrMessHtmlReducer.data)
     const profileInfos = useSelector(state => state.ProfileInfosReducer.data)
     const dispatch = useDispatch()
@@ -85,14 +86,17 @@ function UserDashboard() {
     errors.firstName? firstNameErrhtml = <p className="error-message">{errors.firstName.message}</p>: firstNameErrhtml = ''
     errors.lastName? nameErrhtml = <p className="error-message">{errors.lastName.message}</p> : nameErrhtml = ''
 
-    useEffect(() => {
 
+    useEffect(() => {
         const token = localStorage.getItem('token')
 
         if (!apiResLog.isLoading && !token) {
             navigate("/sign-in")
         }
+    }, [])
 
+
+    useEffect(() => {
 
         if (apiResProf.error) {
             dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
@@ -105,6 +109,14 @@ function UserDashboard() {
         }
     }, [apiResProf])
 
+
+    useEffect(() => {
+
+        if(!apiResProfDatas.error) {
+            console.log(apiResProfDatas.data)
+        }
+
+    }, [apiResProfDatas])
 
     return (
         <React.Fragment>

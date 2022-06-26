@@ -10,7 +10,6 @@ function UserLink({userId}) {
     let profileName = "Tony"
 
     if (ids) {
-        console.log('render')
         profileName = ids.data.body.firstName
     }
 

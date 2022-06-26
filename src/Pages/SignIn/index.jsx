@@ -8,6 +8,7 @@ import { setLogin } from '../../Redux/Login/action'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import { setRememberMe } from "../../Redux/RememberMe/action"
 import { setIds } from "../../Redux/Ids/action"
+import { setProfileDatas } from "../../Redux/ProfileDatas/action"
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 import useErrorsMessages from "../../Hooks/ErrorsMessages"
@@ -49,6 +50,14 @@ function SignIn() {
                 localStorage.removeItem('mail')
                 localStorage.removeItem('pw')
             }
+            
+            const dataParams = {
+                method: 'put', 
+                url: 'http://localhost:3001/api/v1/user/profile', 
+                headers: {
+                    Authorization: `Bearer ${apiRes.data}`
+                }}
+            dispatch(setProfileDatas(dataParams))
             navigate("/user/12")
         } 
 
