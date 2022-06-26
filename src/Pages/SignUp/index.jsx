@@ -8,7 +8,7 @@ import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import { setRememberMe } from "../../Redux/RememberMe/action"
 import { setIds } from "../../Redux/Ids/action"
-import { apiCall } from "../../Redux/SignUp/action"
+import { setCreation } from "../../Redux/SignUp/action"
 import Header from "../../Components/Header"
 import Footer from "../../Components/Footer"
 
@@ -35,7 +35,7 @@ function SignUp() {
         const dataParams = {method: 'post', 
                             url: 'http://localhost:3001/api/v1/user/signup', 
                             data: {email: usermail, password: password, firstName: userfirtsname, lastName: username}}
-        dispatch(apiCall(dataParams))
+        dispatch(setCreation(dataParams))
     }
 
 

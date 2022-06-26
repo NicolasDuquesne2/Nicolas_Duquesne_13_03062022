@@ -22,7 +22,7 @@ const postIdFail = response => {
 }
 
 
-export const apiCall = (data) => {
+export const setLogin = (data) => {
 
     return dispatch => {
 

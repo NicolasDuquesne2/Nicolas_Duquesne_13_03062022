@@ -6,7 +6,7 @@ import Footer from '../../Components/Footer'
 import Header from '../../Components/Header'
 import useErrorsMessages from '../../Hooks/ErrorsMessages'
 import AccountCard from '../../Components/AccountCard'
-import { apiCall } from '../../Redux/Profile/action'
+import { setProfile } from '../../Redux/Profile/action'
 import { setProfileInfos } from '../../Redux/ProfileInfos/action'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import './dashboard.css'
@@ -74,7 +74,7 @@ function UserDashboard() {
         headers: {
             Authorization: `Bearer ${token}`
         }}
-        dispatch(apiCall(dataParams))
+        dispatch(setProfile(dataParams))
     }
 
     if (profileInfos) {

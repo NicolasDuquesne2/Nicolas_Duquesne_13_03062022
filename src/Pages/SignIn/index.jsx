@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux/es/exports"
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import { apiCall } from '../../Redux/Login/action'
+import { setLogin } from '../../Redux/Login/action'
 import { setErrMessHtml } from '../../Redux/FormErrMessHTML/action'
 import { setRememberMe } from "../../Redux/RememberMe/action"
 import { setIds } from "../../Redux/Ids/action"
@@ -30,7 +30,7 @@ function SignIn() {
         rememberMe? dispatch(setRememberMe(true)): dispatch(setRememberMe(false))
         dispatch(setIds({username, password}))
         const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
-        dispatch(apiCall(dataParams))
+        dispatch(setLogin(dataParams))
     }
 
     errors.username? userNameError = <p className="error-message">{errors.username.message}</p>: userNameError = ''

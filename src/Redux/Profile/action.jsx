@@ -21,7 +21,7 @@ const putProfileFail = response => {
     }
 }
 
-export const apiCall = (data) => {
+export const setProfile = (data) => {
 
     return dispatch => {
 
