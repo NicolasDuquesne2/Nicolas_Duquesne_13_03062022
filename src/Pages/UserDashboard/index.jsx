@@ -67,13 +67,7 @@ function UserDashboard() {
     
     const onSubmit = ({firstName, lastName}) => {
         const token = apiResLog.data? apiResLog.data: localStorage.getItem("token")
-       const dataParams = {
-        method: 'put', 
-        url: 'http://localhost:3001/api/v1/user/profile', 
-        data: {firstName, lastName}, 
-        headers: {
-            Authorization: `Bearer ${token}`
-        }}
+        const dataParams = {data: {firstName, lastName}, token: token}
         dispatch(setProfile(dataParams))
     }
 

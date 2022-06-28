@@ -30,7 +30,10 @@ function SignIn() {
     const onSubmit = ({username, password, rememberMe}) => {
         rememberMe? dispatch(setRememberMe(true)): dispatch(setRememberMe(false))
         dispatch(setIds({username, password}))
-        const dataParams = {method: 'post', url: 'http://localhost:3001/api/v1/user/login', data: {email: username, password: password}}
+        /*const dataParams = {method: 'post', 
+                            url: 'http://localhost:3001/api/v1/user/login', 
+                            data: {email: username, password: password}}*/
+        const dataParams = {data: {email: username, password: password}}
         dispatch(setLogin(dataParams))
     }
 

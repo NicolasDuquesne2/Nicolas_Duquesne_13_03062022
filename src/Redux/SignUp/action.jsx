@@ -1,4 +1,4 @@
-import { useAxios } from '../../Hooks/Axios'
+import { useDataProvider } from '../../Service/apiCall'
 import {POST_DATA, POST_DATA_SUCCES, POST_DATA_FAIL } from './type'
 
 const postId = () => {
@@ -27,9 +27,11 @@ export const setCreation = (data) => {
     return dispatch => {
 
         const defaultErrMessage = "Login has failed. Please try later"
+        let params = {action: 'signup', message: defaultErrMessage, payload: {method: 'post', data: data.data}}
+        
         dispatch(postId())
 
-        const dataFetch = useAxios(data, defaultErrMessage)
+        const dataFetch = useDataProvider(params, defaultErrMessage)
         dataFetch
         .then(res => {
             res.error? dispatch(postIdFail(res.error)): dispatch(postIdSuccess(res))

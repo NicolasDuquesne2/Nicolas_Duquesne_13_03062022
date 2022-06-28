@@ -32,9 +32,7 @@ function SignUp() {
     const onSubmit = ({userfirtsname, username, usermail , password, rememberMe}) => {
         rememberMe? dispatch(setRememberMe(true)): dispatch(setRememberMe(false))
         dispatch(setIds({usermail, password}))
-        const dataParams = {method: 'post', 
-                            url: 'http://localhost:3001/api/v1/user/signup', 
-                            data: {email: usermail, password: password, firstName: userfirtsname, lastName: username}}
+        const dataParams = {data: {email: usermail, password: password, firstName: userfirtsname, lastName: username}}
         dispatch(setCreation(dataParams))
     }
 

@@ -1,4 +1,4 @@
-import { useAxios } from '../../Hooks/Axios'
+import { useDataProvider } from '../../Service/apiCall'
 import {POST_ID, POST_ID_SUCCES, POST_ID_FAIL } from './type'
 
 const postId = () => {
@@ -27,9 +27,9 @@ export const setLogin = (data) => {
     return dispatch => {
 
         const defaultErrMessage = "Login has failed. Please try later"
+        let params = {action: 'login', message: defaultErrMessage, payload: {method: 'post', data: data.data}}
         dispatch(postId())
-
-        const dataFetch = useAxios(data, defaultErrMessage)
+        const dataFetch = useDataProvider(params, defaultErrMessage)
         dataFetch
         .then(res => {
             res.error? dispatch(postIdFail(res.error)): dispatch(postIdSuccess(res.data.body.token))
