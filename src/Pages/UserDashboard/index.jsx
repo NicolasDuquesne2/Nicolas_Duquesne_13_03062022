@@ -106,7 +106,6 @@ function UserDashboard() {
 
 
     useEffect(() => {
-        console.log(apiResProfDatas)
 
         if(!apiResProfDatas.isLoading && apiResProfDatas.data != null) {
             dispatch(setProfileInfos({firstName: apiResProfDatas.data.data.body.firstName, lastName: apiResProfDatas.data.data.body.lastName}))
