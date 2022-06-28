@@ -28,7 +28,6 @@ export function useDataProvider(params) {
         return returned
     }
 
-    console.log(params.action)
     switch(params.action) {
         case 'login':
             payload = params.payload
@@ -39,6 +38,10 @@ export function useDataProvider(params) {
             payload.url = `${baseUrl}/user/signup`
             return fetchAxios(payload, params.message)
         case 'set profile':
+            payload = payload = params.payload
+            payload.url = `${baseUrl}/user/profile`
+            return fetchAxios(payload, params.message)
+        case 'get profile':
             payload = payload = params.payload
             payload.url = `${baseUrl}/user/profile`
             return fetchAxios(payload, params.message)
