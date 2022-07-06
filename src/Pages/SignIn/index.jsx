@@ -92,8 +92,8 @@ function SignIn() {
                     </div>
                     <input type="submit" className="sign-in-button" value="Sign in"/>
                 </form>
-                <div className="SignIn-footer">
-                    <a href="/sign-up">First-Time User</a>
+                <div className="signIn-footer">
+                    <a className="signUp-link" href="/sign-up">First-Time User</a>
                 </div>
             </section>
             </main>

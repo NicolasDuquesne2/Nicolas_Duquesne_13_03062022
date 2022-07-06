@@ -60,3 +60,19 @@ font-size: 1.2rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
+
+.signIn-footer {
+    width: 100%;
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.signUp-link {
+    text-decoration: none;
+    color: black;
+}
+
+.signUp-link:hover {
+    text-decoration: underline;
+}

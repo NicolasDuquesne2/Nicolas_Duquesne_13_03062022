@@ -50,3 +50,7 @@
     border-style: none;
     padding-left: 4px;
 }
+
+.name-button {
+    cursor: pointer;
+}
