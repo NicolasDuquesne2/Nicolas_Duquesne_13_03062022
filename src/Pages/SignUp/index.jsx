@@ -42,9 +42,8 @@ function SignUp() {
             dispatch(setIds(null))
             dispatch(setErrMessHtml(<p className="error-message-form">{formErrorMessage}</p>))
         } else if (!apiRes.isLoading && apiRes.data != null) {
-            localStorage.setItem('token', apiRes.data)
             if (rememberMe) {
-                localStorage.setItem('mail', ids.username)
+                localStorage.setItem('mail', ids.usermail)
                 localStorage.setItem('pw', ids.password)
             } else {
                 localStorage.removeItem('mail')
@@ -53,7 +52,7 @@ function SignUp() {
             navigate("/sign-in")
         } 
 
-    },[apiRes])
+    },[apiRes, ids])
 
 
     errors.userfirtsname? userFirstNameError = <p className="error-message">{errors.userfirtsname.message}</p>: userFirstNameError = ''

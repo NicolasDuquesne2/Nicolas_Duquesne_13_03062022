@@ -1,17 +1,17 @@
-import React from 'react';
-import {createRoot} from 'react-dom/client';
+import React from 'react'
+import {createRoot} from 'react-dom/client'
 import { BrowserRouter as Router,Route, Routes } from 'react-router-dom'
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
 import './main.css'
-import store from './Redux/Store';
-import Home from './Pages/Home';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
-import UserDashboard from './Pages/UserDashboard';
-import AccountDetail from './Pages/AccountDetails';
-import ErrorPage from './Pages/Error';
+import store from './Redux/Store'
+import Home from './Pages/Home'
+import SignIn from './Pages/SignIn'
+import SignUp from './Pages/SignUp'
+import UserDashboard from './Pages/UserDashboard'
+import AccountDetail from './Pages/AccountDetails'
+import ErrorPage from './Pages/Error'
 
-const root = createRoot(document.getElementById('root'));
+const root = createRoot(document.getElementById('root'))
 
 root.render(
   <Router >
@@ -26,6 +26,6 @@ root.render(
         </Routes>
       </Provider>
   </Router>
-);
+)
 
 
